@@ -2,11 +2,19 @@ version: '3'
 services:
   frontend:
     build:
+<<<<<<< HEAD
+      context: ./angular-8-client 
+    ports:
+      - 8081:8081
+    networks:
+      - net-app  
+=======
       context: ./angular-8-client
     ports:
       - 8081:8081
     networks:
       - myapp_network
+>>>>>>> origin/anas-prog
 
   backend:
     build:
@@ -14,9 +22,16 @@ services:
     ports:
       - 8081:8081
     networks:
+<<<<<<< HEAD
+      - net-app  
+    depends_on:
+      - db
+      
+=======
       - myapp_network
     depends_on:
       - db
+>>>>>>> origin/anas-prog
 
   db:
     image: mysql:latest
@@ -28,8 +43,16 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     networks:
+<<<<<<< HEAD
+      - net-app
+
+    
+  networks:
+    net-app: 
+=======
       - myapp_network
 
 networks:
   myapp_network:
     driver: bridge
+>>>>>>> origin/anas-prog

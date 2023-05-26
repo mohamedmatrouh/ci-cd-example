@@ -19,4 +19,8 @@ RUN npm run build
 EXPOSE 8081
 
 # Run the Angular app using the ng serve command
+<<<<<<< HEAD
 CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "8081"]
+=======
+CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "8081"]
+>>>>>>> origin/anas-prog
