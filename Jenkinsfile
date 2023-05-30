@@ -12,7 +12,7 @@ pipeline {
                     dir('webapp') {
                         sh 'docker-compose up'
                         // Build the Docker containers
-                                   }
+                    }
                 }
             }
         }
