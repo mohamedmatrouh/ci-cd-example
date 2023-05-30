@@ -21,8 +21,4 @@ RUN mvn package
 # Set the entrypoint command to run the application
 WORKDIR /app/target/
 RUN chmod 777 spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
-<<<<<<< HEAD
 CMD ["java", "-jar", "spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar"]
-=======
-CMD ["java", "-jar", "spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar"]
->>>>>>> origin/anas-prog

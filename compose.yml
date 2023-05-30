@@ -1,58 +1,57 @@
-version: '3'
+version: "3.3"
+
+#Define services
 services:
-  frontend:
-    build:
-<<<<<<< HEAD
-      context: ./angular-8-client 
-    ports:
-      - 8081:8081
-    networks:
-      - net-app  
-=======
-      context: ./angular-8-client
-    ports:
-      - 8081:8081
-    networks:
-      - myapp_network
->>>>>>> origin/anas-prog
 
-  backend:
-    build:
-      context: ./spring-boot-server
-    ports:
-      - 8081:8081
-    networks:
-<<<<<<< HEAD
-      - net-app  
-    depends_on:
-      - db
-      
-=======
-      - myapp_network
-    depends_on:
-      - db
->>>>>>> origin/anas-prog
-
-  db:
-    image: mysql:latest
-    ports:
-      - 3306:3306
+  #MySql Database for application
+  mysql-db:
+    image: mysql
+    restart: always
+    container_name: mysql-db
+    #Environment variable for password and default database
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_DATABASE: 'tutorials'
+    ports:
+      - 3306:3306 #Forwars the exposed port 3306 on the container to port 3306 on the host machine
     networks:
-<<<<<<< HEAD
-      - net-app
+      mynetwork:
+        ipv4_address: 192.168.0.2
+  #Back-end Spring Boot Application
+  springboot-app:
+    #The docker file in BE, build the jar and provides the docker image.
+    build: ./spring-boot-server
+    container_name: springboot-app
+    #Environment variable for Spring Boot Application.
+    environment:
+      MYSQL_HOST: 'mysql-db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_DATABASE: 'tutorials'
+    ports:
+      - 8080:8080 #Forwars the exposed port 8080 on the container to port 8080 on the host machine
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.0.3
+    depends_on:
+      - mysql-db
 
-    
-  networks:
-    net-app: 
-=======
-      - myapp_network
+
+  angular-app:
+    #The docker file in FE, builds and provides the docker image.
+    build: ./angular-8-client
+    container_name: angular-app
+    ports:
+      - 8081:8081 #Forwars the exposed port 8081 on the container to port 8081 on the host machine
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.0.4  
 
 networks:
-  myapp_network:
+  mynetwork:
     driver: bridge
->>>>>>> origin/anas-prog
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24
+        - gateway: 192.168.0.1

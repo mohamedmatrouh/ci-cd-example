@@ -1,4 +1,4 @@
-# Stage 1: Build Angular frontend
+#Stage 1: Build Angular frontend
 FROM node:14.17.0-alpine AS frontend-builder
 
 WORKDIR /app
@@ -8,6 +8,11 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm install -g npm@9.6.7
+RUN npm install -g @angular/cli
+
+#Environement variables
+#ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 # Copy the entire Angular project
 COPY . .
@@ -19,8 +24,4 @@ RUN npm run build
 EXPOSE 8081
 
 # Run the Angular app using the ng serve command
-<<<<<<< HEAD
-CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "8081"]
-=======
-CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "8081"]
->>>>>>> origin/anas-prog
+CMD ["ng", "serve", "--port", "8081"]
