@@ -5,9 +5,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Pull the latest Docker images
+                    // Cloning the repo
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'git clone https://github.com/houafilyas/webapp.git'
+                        }
+                    sh 'cd webapp'
                     sh 'docker-compose up'
-                    
                     // Build the Docker containers
                     //sh 'docker-compose build'
                 }
