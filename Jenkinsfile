@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Cloning the repo
-                        sh 'git pull https://gitlab.com/houafilyas/webapp.git master'
+                        sh 'git clone https://gitlab.com/houafilyas/webapp.git application'
                     dir('webapp') {
                         sh 'docker-compose up'
                         // Build the Docker containers
