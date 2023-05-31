@@ -7,7 +7,7 @@ pipeline {
                 script {
                     // Cloning the repo
                         sh 'git pull https://gitlab.com/houafilyas/webapp.git master'
-                        sh 'sudo docker-compose build'
+                        sh 'docker-compose build'
                         // Build the Docker images of the application
                 }
             }
