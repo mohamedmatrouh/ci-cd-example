@@ -6,7 +6,9 @@ pipeline {
             steps {
                 script {
                     // Cloning the repo
-                        sh 'git clone git@gitlab.com:houafilyas/webapp.git'
+                    withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'git clone https://$(USERNAME):$(PASSWORD)@github.com/houafilyas/webapp.git'
+                        }
                     dir('webapp') {
                         sh 'docker-compose up'
                         // Build the Docker containers
