@@ -5,9 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                        sh 'pwd'
                     // Cloning the repo
-                        sh 'git clone https://gitlab.com/houafilyas/webapp.git application'
+                        sh 'git pull https://gitlab.com/houafilyas/webapp.git master'
                     dir('webapp') {
                         sh 'docker-compose up'
                         // Build the Docker containers
