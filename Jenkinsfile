@@ -9,7 +9,7 @@ pipeline {
                         sh 'cd /home/webapp'
                     // Pulling the changes of the repo
                         sh 'git pull https://gitlab.com/houafilyas/webapp.git master'
-                        sh 'docker-compose build'
+                        sh 'sudo docker-compose build'
                         // Build the Docker images of the application
                 }
             }
