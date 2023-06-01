@@ -5,6 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                        sh 'sudo su'
+                        sh 'cd /home/webapp'
                     // Cloning the repo
                         sh 'git pull https://gitlab.com/houafilyas/webapp.git master'
                         sh 'docker-compose build'
