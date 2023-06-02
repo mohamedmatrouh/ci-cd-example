@@ -3,20 +3,22 @@ version: "3.3"
 #Define services
 services:
 
-  #MySql Database for application
-  mysql-db:
-    image: mysql
-    restart: always
-    container_name: mysql-db
-    #Environment variable for password and default database
-    environment:
-      MYSQL_ROOT_PASSWORD: '123456'
-      MYSQL_DATABASE: 'tutorials'
-    ports:
-      - 3306:3306 #Forwars the exposed port 3306 on the container to port 3306 on the host machine
-    networks:
-      mynetwork:
-        ipv4_address: 192.168.0.2
+  # #MySql Database for application
+  # mysql-db:
+  #   image: mysql
+  #   restart: always
+  #   container_name: mysql-db
+  #   #Environment variable for password and default database
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: '123456'
+  #     MYSQL_DATABASE: 'tutorials'
+  #   ports:
+  #     - 3306:3306 #Forwars the exposed port 3306 on the container to port 3306 on the host machine
+  #   networks:
+  #     mynetwork:
+  #       ipv4_address: 10.0.0.2
+
+
   #Back-end Spring Boot Application
   springboot-app:
     #The docker file in BE, build the jar and provides the docker image.
@@ -31,10 +33,11 @@ services:
     ports:
       - 8080:8080 #Forwars the exposed port 8080 on the container to port 8080 on the host machine
     networks:
-      mynetwork:
-        ipv4_address: 192.168.0.3
-    depends_on:
-      - mysql-db
+      - webapp_mynetwork
+        # ipv4_address: 10.0.0.3
+    # depends_on:
+    #   - mysql-db
+
 
 
   angular-app:
@@ -44,14 +47,14 @@ services:
     ports:
       - 8081:8081 #Forwars the exposed port 8081 on the container to port 8081 on the host machine
     networks:
-      mynetwork:
-        ipv4_address: 192.168.0.4  
+      - webapp_mynetwork
+        #ipv4_address: 10.0.0.4  
 
 networks:
-  mynetwork:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.0.0/24
-      
+  webapp_mynetwork:
+    external: true
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 10.0.0.0/24
