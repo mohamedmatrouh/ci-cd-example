@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    timeout(time: 30, unit: 'MINUTES') {
+                    timeout(time: 10, unit: 'MINUTES') {
                         sh 'sudo su'
                         sh 'cd /home/webapp'
                         // Pulling the changes of the repo
