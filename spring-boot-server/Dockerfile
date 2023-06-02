@@ -18,6 +18,7 @@ COPY ./src /app/src
 # Build the application
 RUN mvn package
 
+EXPOSE 8080
 # Set the entrypoint command to run the application
 WORKDIR /app/target/
 RUN chmod 777 spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
