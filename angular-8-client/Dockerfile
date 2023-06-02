@@ -1,5 +1,5 @@
 #Stage 1: Build Angular frontend
-FROM node:14.17.0-alpine AS frontend-builder
+FROM node:16.20.0 AS frontend-builder
 
 WORKDIR /app
 
