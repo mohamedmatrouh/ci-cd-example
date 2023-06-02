@@ -11,9 +11,6 @@ RUN npm install
 RUN npm install -g npm@9.6.7
 RUN npm install -g @angular/cli
 
-#Environement variables
-#ENV NODE_OPTIONS="--openssl-legacy-provider"
-
 # Copy the entire Angular project
 COPY . .
 
@@ -24,4 +21,4 @@ RUN npm run build
 EXPOSE 8081
 
 # Run the Angular app using the ng serve command
-CMD ["ng", "serve", "--port", "8081"]
+CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "8081"]
