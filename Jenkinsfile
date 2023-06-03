@@ -15,34 +15,6 @@ pipeline {
                     }        
                 }
             }
-        }
-        
-        // Add more stages here if needed
-        
-        stage('Deploy') {
-            steps {
-                script {
-                    // Start the Docker containers
-                    sh 'docker-compose up -d'
-                }
-            }
-        }
-    }
-    
-    post {
-        always {
-            // Clean up Docker containers and images
-            cleanDocker()
-        }
-    }
-}
-
-def cleanDocker() {
-    script {
-        // Stop and remove the Docker containers
-        sh 'docker-compose down'
-        
-        // Remove the Docker images
-        sh 'docker-compose rm -f'
-    }
+        }   
+    } 
 }
