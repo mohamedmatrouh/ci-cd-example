@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  springboot-app:
+  frontend-app:
     image: frontend-app
     container_name: frontend-app
     ports:

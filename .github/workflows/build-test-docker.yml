@@ -1,42 +1,4 @@
-# name: Build, Test, and Docker Build
-
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
-
-# jobs:
-#   build:
-#     runs-on: self-hosted
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2 # Replace 'subpath' with the actual subpath of your project
-
-#       - name: Build with Maven
-#         working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
-#         run: mvn clean package -DskipTests
-
-#       - name: Run tests
-#         working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
-#         run: mvn test
-
-#       - name: Build Docker image
-#         working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
-#         run: |
-#           docker build -t backend-app -f Dockerfile .
-
-#       - name: Deploy Docker image
-#         working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
-#         run: |
-#           docker compose down
-#           docker compose up -d
-
-
-name: Node.js CI
+name: CI - CD
 
 on:
   push:
@@ -47,7 +9,32 @@ on:
       - main
 
 jobs:
-  build:
+  build-back:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Replace 'subpath' with the actual subpath of your project
+
+      - name: Build with Maven
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        run: mvn clean package -DskipTests
+
+      - name: Run tests
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        run: mvn test
+
+      - name: Build Docker image
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        run: |
+          docker build -t backend-app -f Dockerfile .
+
+      - name: Deploy Docker image
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        run: |
+          docker compose down
+          docker compose up -d
+  build-front:
     runs-on: self-hosted
 
     steps:
