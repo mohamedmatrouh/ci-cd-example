@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000  
     networks:
-          - shared-network
+      - shared-network
 networks:
   shared-network:
     external: true

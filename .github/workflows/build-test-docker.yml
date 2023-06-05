@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build-back:
@@ -14,26 +11,29 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # Replace 'subpath' with the actual subpath of your project
+        uses: actions/checkout@v2
 
       - name: Build with Maven
-        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server'
         run: mvn clean package -DskipTests
 
       - name: Run tests
-        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server'
         run: mvn test
 
       - name: Build Docker image
-        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server'
         run: |
           docker build -t backend-app -f Dockerfile .
 
       - name: Deploy Docker image
-        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server'
         run: |
           docker compose down
           docker compose up -d
+  # 
+  # 
+  # 
   build-front:
     runs-on: self-hosted
     
@@ -56,13 +56,17 @@ jobs:
         working-directory: 'angular-8-client'
         run: npm run build
 
+      # - name: Run Test
+      #   working-directory: 'angular-8-client'
+      #   run: npm run test
+
       - name: Run Build docker
         working-directory: 'angular-8-client'
         run: docker build -t frontend-app -f Dockerfile .
 
 
       - name: Deploy Docker image
-        working-directory: 'angular-8-client' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'angular-8-client'
         run: |
           docker compose down
           docker compose up -d
