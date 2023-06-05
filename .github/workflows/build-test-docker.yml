@@ -32,5 +32,6 @@ jobs:
       - name: Deploy Docker image
         working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
         run: |
+          docker compose down
           docker compose up -d
 
