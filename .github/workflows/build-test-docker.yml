@@ -65,7 +65,7 @@ jobs:
 
       - name: Run Build
         working-directory: 'angular-8-client'
-        run: npm build
+        run: npm run build
 
       - name: Run Build docker
         working-directory: 'angular-8-client'
