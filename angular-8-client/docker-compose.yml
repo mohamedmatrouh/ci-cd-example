@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  springboot-app:
+    image: frontend-app
+    container_name: frontend-app
+    ports:
+      - 3000:3000  
+    networks:
+          - shared-network
+networks:
+  shared-network:
+    external: true
