@@ -71,6 +71,9 @@ jobs:
         working-directory: 'angular-8-client'
         run: docker build -t frontend-app -f Dockerfile .
 
-      # - name: deploy
-      #   working-directory: 'angular-8-client'
-      #   run: npm build
+
+      - name: Deploy Docker image
+        working-directory: 'angular-8-client' # Replace 'subpath' with the actual subpath of your project
+        run: |
+          docker compose down
+          docker compose up -d
