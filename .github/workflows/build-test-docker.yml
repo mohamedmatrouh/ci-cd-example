@@ -63,6 +63,14 @@ jobs:
         working-directory: 'angular-8-client'
         run: npm ci
 
-      - name: Run tests
+      - name: Run Build
         working-directory: 'angular-8-client'
-        run: npm test
+        run: npm build
+
+      - name: Run Build docker
+        working-directory: 'angular-8-client'
+        run: docker build -t frontend-app -f Dockerfile .
+
+      # - name: deploy
+      #   working-directory: 'angular-8-client'
+      #   run: npm build
