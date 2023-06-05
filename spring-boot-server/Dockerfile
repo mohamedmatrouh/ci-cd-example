@@ -1,25 +1,8 @@
-# Set the base image to use
-FROM maven:3.8.4-openjdk-8-slim
+FROM openjdk:8u342
 
-# Set the working directory inside the container
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /app/
 
-# Copy the POM file to the container
-COPY ./pom.xml /app/pom.xml
+COPY ./target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar /app/app.jar
 
-
-# Download the project dependencies
-RUN mvn dependency:go-offline -B
-
-# Copy the application source code to the container
-COPY ./src /app/src
-
-# Build the application
-RUN mvn package
-
-EXPOSE 8080
-# Set the entrypoint command to run the application
-WORKDIR /app/target/
-RUN chmod 777 spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
-CMD ["java", "-jar", "spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar"]
+RUN chmod 777 /app/app.jar
+CMD ["java", "-jar", "/app/app.jar"]
