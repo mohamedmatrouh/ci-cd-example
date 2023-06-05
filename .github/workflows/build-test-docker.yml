@@ -36,6 +36,8 @@ jobs:
           docker compose up -d
   build-front:
     runs-on: self-hosted
+    
+    needs: build-back
 
     steps:
       - name: Checkout repository
