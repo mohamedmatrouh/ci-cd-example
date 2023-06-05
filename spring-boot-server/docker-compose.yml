@@ -5,19 +5,14 @@ services:
     image: backend-app
     container_name: springboot-app
     environment:
-      MYSQL_HOST: '10.0.0.14:3306'
+      MYSQL_HOST: 'mysql-db:3306'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: '123456'
       MYSQL_DATABASE: 'tutorials'
     ports:
-      - 8080:8080 
+      - 8080:8080  
     networks:
-      mynetwork:
-        ipv4_address: 10.1.0.3
-        
+          - shared-network
 networks:
-  mynetwork:
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.1.0.0/24
+  shared-network:
+    external: true
