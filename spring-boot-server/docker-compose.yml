@@ -11,3 +11,13 @@ services:
       MYSQL_DATABASE: 'tutorials'
     ports:
       - 8080:8080 
+    networks:
+      mynetwork:
+        ipv4_address: 10.1.0.3
+        
+networks:
+  mynetwork:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/24
