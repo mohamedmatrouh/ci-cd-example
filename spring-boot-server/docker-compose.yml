@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  springboot-app:
+    build: ./spring-boot-server
+    container_name: springboot-app
+    environment:
+      MYSQL_HOST: '10.0.0.14'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_DATABASE: 'tutorials'
+    ports:
+      - 8080:8080 
