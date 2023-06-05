@@ -19,15 +19,15 @@ jobs:
           path: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
 
       - name: Build with Maven
-        working-directory: 'subpath' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
         run: mvn clean package -DskipTests
 
       - name: Run tests
-        working-directory: 'subpath' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
         run: mvn test
 
       - name: Build Docker image
-        working-directory: 'subpath' # Replace 'subpath' with the actual subpath of your project
+        working-directory: 'spring-boot-server' # Replace 'subpath' with the actual subpath of your project
         run: |
           docker build -t backend-app -f Dockerfile .
 
